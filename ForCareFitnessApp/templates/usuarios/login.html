@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylelogin.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mako&display=swap" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h1>Conecte-se na sua conta</h1>
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        <input type="text" id="email" name="email" required placeholder="E-mail ou CPF">
+        <input type="password" id="senha" name="senha" required placeholder="Senha">
+        <div>
+            <input type="checkbox" id="lembrar" name="lembrar">
+            <label for="lembrar">Lembrar-me</label>
+            <label id="lembrar2">Esqueceu sua senha?</label>
+        </div>
+        <button type="submit" id="finalizar">Login</button>
+        <p id="temconta">Não possui uma conta?<a href="{% url 'cadastrar_usuario' %}"> Registre-se</a></p>
+    </form>
+</body>
+</html>
+

@@ -1,0 +1,136 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Mako", sans-serif;
+}
+
+html {
+    position: relative;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    background: 
+        linear-gradient(100deg, rgba(134, 134, 134, 0.6) 17.24%, rgba(0, 0, 0, 0.6) 76.72%),
+        url("../imagens/background.png") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#apresentação { 
+    position: absolute;
+    width: 20vw;
+    max-width: 610px;
+    font-family: 'Mako';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 3vmin;
+    line-height: 1.3;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+}
+
+form {
+    position: absolute;
+    width: 40vw;
+    max-width: 480px;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2vw;
+}
+
+h1 {
+    width: auto;
+    max-width: 20vw;
+    font-family: 'Mako';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 4vmin;
+    line-height: 1.3;
+    color: #EDEAEA;
+    margin-bottom: 2vh;
+    text-align: center;
+}
+
+input[type="text"], input[type="password"] {
+    width: 30vw; /* Tamanho base */
+    max-width: 480px; /* Largura máxima */
+    height: 5vh; /* Altura padrão */
+    padding-left: 2vw; /* Preenchimento à esquerda */
+    background: #EDEAEA; /* Cor de fundo */
+    border-radius: 1vh; /* Borda arredondada */
+    font-size: 2vmin; /* Tamanho da fonte responsivo */
+    margin-bottom: 2vh; /* Margem inferior */
+}
+
+#email {
+    width: 30vw; /* Mantendo o mesmo tamanho dos outros inputs */
+    max-width: 480px; /* Largura máxima */
+    height: 5vh; /* Altura padrão */
+    padding-left: 2vw; /* Preenchimento à esquerda */
+    background: #EDEAEA; /* Cor de fundo */
+    border-radius: 1vh; /* Borda arredondada */
+    font-size: 2vmin; /* Tamanho da fonte responsivo */
+    margin-bottom: 2vh; /* Margem inferior */
+}
+
+#finalizar {
+    width: 100%; /* Mantendo largura total */
+    height: 5vh;
+    background: #000000;
+    color: #EDEAEA;
+    font-size: 2vmin;
+    border: none;
+    border-radius: 1vh;
+    margin-top: 2vh;
+}
+
+#temconta {
+    width: auto;
+    font-family: 'Mako';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2vmin;
+    line-height: 1.3;
+    color: #EDEAEA;
+    margin-top: 2vh;
+}
+
+img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 768px) {
+    #apresentação, h1, input[type="text"], input[type="password"], #finalizar, #temconta {
+        font-size: 2.5vmin;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #apresentação, h1, input[type="text"], input[type="password"], #finalizar, #temconta {
+        font-size: 2vmin;
+    }
+
+    form {
+        width: 80%;
+    }
+}

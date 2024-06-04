@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylealuno.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylefichas.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mako&display=swap" rel="stylesheet">
+    <title>Dashboard-Alunos</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <section class="seção1">
+        <button type="button" id="criar-ficha" onclick="visualizarTreinos(1)">Verificar ficha de treino</button>
+    </section>
+    <section class="seção2">
+        <img src="{% static 'imagens/user-icon.png' %}" alt="Descrição da imagem">
+        <p>Nome: {{ usuario.nome }}</p>
+        <p>(Aluno)</p>
+        <p>ID: #{{ usuario.id }}</p>
+        <h1>Dados da Conta</h1> 
+        <p>E-mail: {{ usuario.email }}</p>
+        <p>CPF: {{ usuario.cpf }}</p>
+        <p>Data de Nascimento: {{ usuario.nascimento }}</p>
+        <h1>Dados Adicionais</h1> 
+        <p>Peso:</p>
+        <p>Altura:</p>
+        <p>Telefone:</p>
+    </section>
+
+    <script>
+        let fichas = [
+            {
+                id: 1,
+                exercicios: ["SUPINO HEREGE", "SUPINO RETO", "SUPINO INCLINADO", "SUPINO SUPREMO", "SUPINO ULTIMATE"]
+            }
+        ];
+
+        function criarPopup(treinos) {
+            const popup = document.createElement("div");
+            popup.classList.add("popup");
+        
+            for (let i = 0; i < treinos.length; i++) {
+                const blackRectangle = document.createElement("div");
+                blackRectangle.classList.add(`black-rectangle${i+1}`);
+                const textoRetangulo = document.createElement("span");
+                textoRetangulo.textContent = treinos[i];
+                textoRetangulo.classList.add(`texto-retangulo${i+1}`);
+                blackRectangle.appendChild(textoRetangulo);
+                popup.appendChild(blackRectangle);
+
+                const whitespace = document.createElement("div");
+                whitespace.classList.add(`white-space${i+1}`);
+                popup.appendChild(whitespace);
+            }
+        
+            const closeButton = document.createElement("button");
+            closeButton.innerHTML = "X";
+            closeButton.classList.add("close-btn");
+            closeButton.onclick = function() {
+                document.body.removeChild(popup);
+            };
+            popup.appendChild(closeButton);
+        
+            document.body.appendChild(popup);
+        }
+
+        function visualizarTreinos(id) {
+            const ficha = fichas.find(ficha => ficha.id === id);
+            if (ficha) {
+                criarPopup(ficha.exercicios);
+            }
+        }
+    </script>
+</body>
+</html>

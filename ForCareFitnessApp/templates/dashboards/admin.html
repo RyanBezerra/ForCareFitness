@@ -1,0 +1,52 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styleadmin.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Mako&display=swap" rel="stylesheet">
+        <title>Dashboard-Admin</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <section class="seção1">
+            <button type="button" onclick="adicionarFichas()" id="criar-ficha">Criar Ficha</button>
+            <button type="button" id="verificar-fichas" onclick="window.location.href = '{% url 'fichas' %}'">Gerenciar Fichas</button>
+        </section>
+        <section class="seção2">
+            <img src="{% static '/imagens/user-icon.png' %}" alt="Descrição da imagem">
+            <p>Nome: Administrador</p>
+            <p>(Administrador)</p>
+            <p>ID: #1</p>
+            <h1>Dados da Conta</h1> 
+            <p>E-mail:</p>
+            <p>CPF:</p>
+            <p>Data de Nascimento:</p>
+            <button type="button" id="cadastro-professores">Acessar cadastro dos professores</button>
+            <button type="button" id="cadastro-alunos">Acessar cadastro dos alunos</button>
+            <button type="button" id="cadastro-geral">Acessar cadastro geral</button>
+        </section>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#criar-ficha').click(function() {
+                $.ajax({
+                    url: '/adicionar_fichas/',
+                    type: 'GET',
+                    success: function(data) {
+                        alert(data.mensagem);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</html>

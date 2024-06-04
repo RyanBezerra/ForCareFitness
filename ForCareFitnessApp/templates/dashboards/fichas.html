@@ -1,0 +1,246 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylefichas.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mako&display=swap" rel="stylesheet">
+    <title>Dashboard-Fichas</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body onload="adicionarFichas({{ quantidade_fichas }})">
+    <div class="search-bar">
+        <input type="text" name="q" placeholder="Filtrar...">
+        <button type="submit">Filtrar</button>
+    </div>
+    <table id="tabela-fichas"></table>
+
+    <script>
+
+        function removerUltimaFicha() {
+            fetch('/remover_fichas/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')  // Inclua o token CSRF
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    console.log(data.message);
+                    alert('Última ficha removida com sucesso');
+                } else {
+                    console.error(data.message);
+                    alert('Erro ao remover a última ficha');
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Verifica se este cookie começa com o nome desejado
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        let contadorFichas = 1;
+        let fichas = [];
+
+        function adicionarFichas(quantidade) {
+            for (let i = 0; i < quantidade; i++) {
+                const ficha = {
+                    id: contadorFichas,
+                    exercicios: ["SUPINO HEREGE", "SUPINO RETO", "SUPINO INCLINADO", "SUPINO SUPREMO", "SUPINO ULTIMATE"]
+                };
+                fichas.push(ficha);
+
+                const tabela = document.getElementById("tabela-fichas");
+                const novaLinha = document.createElement("tr");
+                novaLinha.innerHTML = `
+                    <td>${contadorFichas}</td>
+                    <td>FICHA TREINO</td>
+                    <td><a href="javascript:void(0)" onclick="editarTreinos(${contadorFichas})">EDITAR</a></td>
+                    <td><a href="javascript:void(0)" onclick="visualizarTreinos(${contadorFichas})">VISUALIZAR</a></td>
+                    <td><a href="javascript:void(0)" onclick="removerUltimaFicha()">EXCLUIR</a></td>
+                `;
+                tabela.appendChild(novaLinha);
+                contadorFichas++;
+            }
+            atualizarPosicaoBotoes();
+
+            // Enviar os exercícios ao servidor (se necessário)
+            for (let i = 0; i < fichas.length; i++) {
+                enviarExerciciosAoServidor(fichas[i].exercicios);
+            }
+        }
+        
+        function enviarExerciciosAoServidor(exercicios) {
+            fetch('/cadastrar_ficha/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')  // Adicione essa linha para incluir o token CSRF
+                },
+                body: JSON.stringify({ exercicios }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Ficha enviada com sucesso!');
+                } else {
+                    console.error('Erro ao enviar a ficha');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+
+        function removerFicha(elemento) {
+            const linha = elemento.closest('tr');
+            const idFicha = linha.querySelector('td:first-child').textContent; // Obtém o ID da ficha da primeira célula da linha
+            
+            fetch('/remover_fichas/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken') // Certifique-se de ter a função getCookie() definida
+                },
+                body: JSON.stringify({ idFicha }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Ficha excluída com sucesso!');
+                    linha.parentNode.removeChild(linha);
+                    contadorFichas--;
+                    atualizarPosicaoBotoes();
+                } else {
+                    console.error('Erro ao excluir a ficha');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+        
+
+        function atualizarPosicaoBotoes() {
+            const botoes = document.getElementById("botoes");
+            botoes.style.marginTop = `${20 + (contadorFichas * 60)}px`;
+        }
+
+        function criarPopup(treinos) {
+            const popup = document.createElement("div");
+            popup.classList.add("popup");
+        
+            for (let i = 0; i < treinos.length; i++) {
+                const blackRectangle = document.createElement("div");
+                blackRectangle.classList.add(`black-rectangle${i+1}`);
+                const textoRetangulo = document.createElement("span");
+                textoRetangulo.textContent = treinos[i];
+                textoRetangulo.classList.add(`texto-retangulo${i+1}`);
+                blackRectangle.appendChild(textoRetangulo);
+                popup.appendChild(blackRectangle);
+
+                const whitespace = document.createElement("div");
+                whitespace.classList.add(`white-space${i+1}`);
+                popup.appendChild(whitespace);
+            }
+        
+            const closeButton = document.createElement("button");
+            closeButton.innerHTML = "X";
+            closeButton.classList.add("close-btn");
+            closeButton.onclick = function() {
+                document.body.removeChild(popup);
+            };
+            popup.appendChild(closeButton);
+        
+            document.body.appendChild(popup);
+        }
+
+        function visualizarTreinos(id) {
+            const ficha = fichas.find(ficha => ficha.id === id);
+            if (ficha) {
+                criarPopup(ficha.exercicios);
+            }
+        }
+
+        function editarTreinos(id) {
+            const ficha = fichas.find(ficha => ficha.id === id);
+            if (ficha) {
+                const popup = document.createElement("div");
+                popup.classList.add("popup");
+        
+                ficha.exercicios.forEach((exercicio, index) => {
+                    const blackRectangle = document.createElement("div");
+                    blackRectangle.classList.add(`black-rectangle${index+1}`);
+                    const input = document.createElement("input");
+                    input.setAttribute("type", "text");
+                    input.setAttribute("placeholder", exercicio);
+                    input.classList.add("input-style");
+                    blackRectangle.appendChild(input);
+                    popup.appendChild(blackRectangle);
+        
+                    input.style.border = "none";
+                    input.style.background = "none";
+                    input.style.padding = "0";
+                    input.style.margin = "0";
+                    input.style.font = "inherit";
+                    input.style.outline = "none";
+                    input.style.boxShadow = "none";
+                    input.style.textAlign = "center";
+                    input.style.color = "white";
+        
+                    const whitespace = document.createElement("div");
+                    whitespace.classList.add(`white-space${index+1}`);
+                    popup.appendChild(whitespace);
+                });
+        
+                const closeButton = document.createElement("button");
+                closeButton.innerHTML = "X";
+                closeButton.classList.add("close-btn");
+                closeButton.onclick = function() {
+                    document.body.removeChild(popup);
+                };
+                popup.appendChild(closeButton);
+        
+                const confirmButton = document.createElement("button");
+                confirmButton.innerHTML = "Confirmar";
+                confirmButton.classList.add("confirm-btn");
+                confirmButton.onclick = function() {
+                    const inputs = popup.querySelectorAll("input");
+                    inputs.forEach((input, index) => {
+                        ficha.exercicios[index] = input.value || ficha.exercicios[index];
+                    });
+                    document.body.removeChild(popup);
+                    
+                    // Enviar os exercícios editados ao servidor
+                    enviarExerciciosAoServidor(ficha.exercicios);
+                };
+                popup.appendChild(confirmButton);
+        
+                document.body.appendChild(popup);
+            }
+        }
+        
+
+        // Inicializar posição dos botões
+        atualizarPosicaoBotoes();
+    </script>
+</body>
+</html>

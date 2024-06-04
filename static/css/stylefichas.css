@@ -1,0 +1,168 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.mako-regular {
+    font-family: "Mako", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html {
+    background-color: #E4E4E4;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    font-family: "Mako", sans-serif;
+    position: relative;
+}
+
+.search-bar {
+    position: absolute;
+    top: 100px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    width: 300px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-family: 'Mako', sans-serif;
+    font-size: 16px;
+    background-color: #000000;
+    color: #FFFFFF;
+    outline: none;
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #FFFFFF !important;
+    opacity: 1; 
+}
+
+.search-bar button {
+    width: 80px;
+    height: 45px;
+    background-color: #000000;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    margin-left: -10px;
+    font-family: 'Mako', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+table {
+    width: 90%;
+    border-collapse: separate; 
+    border-spacing: 0 20px; 
+    margin-top: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+th, td {
+    border: none; 
+    padding: 8px;
+    font-family: 'Mako';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    color: #FFFFFF;
+    background-color: #000000;
+    text-align: center;
+}
+
+td:nth-child(2) {
+    padding-right: 100px;
+    padding-left: 100px;
+    text-align: center;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: gray; /* Altere o fundo para cinza */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999; /* Para garantir que o card apareça sobre outros elementos */
+    width: 33vw; /* Define a largura do popup como 1/3 da largura da tela */
+    height: 33vh; /* Define a altura do popup como 1/3 da altura da tela */
+    text-align: center; /* Centraliza o texto no popup */
+    display: grid; /* Usando grid layout */
+    grid-template-columns: 1fr; /* 1 coluna */
+    grid-template-rows: repeat(9, 1fr); /* 9 linhas */
+}
+
+.black-rectangle1, .black-rectangle2, .black-rectangle3, .black-rectangle4, .black-rectangle5 {
+    display: flex; /* Usando flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    background-color: black; /* Cor de fundo preta */
+}
+
+.texto-retangulo1, .texto-retangulo2, .texto-retangulo3, .texto-retangulo4, .texto-retangulo5 {
+    color: white; /* Cor da fonte */
+}
+
+.white-space, .white-space2, .white-space3, .white-space4 {
+    background-color: gray; /* Cor de fundo */
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    border: none; /* Remove a borda */
+    background: none; /* Remove o fundo */
+    font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
+    color: black; /* Define a cor do caractere "X" */
+    padding: 0; /* Remove o preenchimento interno */
+}
+
+.confirm-btn {
+    position: absolute;
+    bottom: -1px;
+    left: 290px;
+    cursor: pointer;
+    border: none; /* Remove a borda */
+    background: none; /* Remove o fundo */
+    font-size: 16px; /* Ajuste o tamanho do texto conforme necessário */
+    color: black; /* Define a cor do caractere "X" */
+}
+
+#botoes {
+    position: relative;
+    width: 200px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#btn-adicionar, #btn-remover {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    text-decoration: none;
+}

@@ -1,0 +1,102 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    
+}
+
+.mako-regular {
+    font-family: "Mako", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html {
+    background: 
+        linear-gradient(100deg, rgba(134, 134, 134, 0.6) 17.24%, rgba(0, 0, 0, 0.6) 76.72%),
+        url("../imagens/background.png") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    font-family: "Mako", sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 39px;
+    font-weight: 400;
+    line-height: 51.02px;
+    text-align: center;
+    color: #CDCDCD;
+    margin-bottom: 50px;
+    font-family: 'Mako';
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    max-width: 480px;
+    height: 55px;
+    padding-left: 10px;
+    margin-bottom: 30px;
+    background: #EDEAEA;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+input[type="checkbox"] {
+
+    margin-right: 10px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    transform: scale(1.5);
+}
+
+label {
+    color: #EDEAEA; 
+}
+
+#finalizar {
+    width: 110%;
+    max-width: 500px;
+    height: 59px;
+    background: #000000;
+    color: #EDEAEA;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+}
+
+#temconta {
+    color: #CDCDCD;
+    font-weight: 400;
+    text-align: center;
+    font-size: 20px;
+    line-height: 26.16px;
+}
+
+#temconta a {
+    color: #4C73D7;
+    text-decoration: none;
+}
+
+#lembrar2{
+    margin-right: 10px;
+    margin-left: 215px;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,152 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.mako-regular {
+    font-family: "Mako", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html {
+    background-color: #E4E4E4;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    font-family: "Mako", sans-serif;
+    position: relative;
+}
+
+.seção1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seção1 button,
+.seção1 input[type="text"],
+.seção1 p {
+    width: 80%;
+    max-width: 400px;
+    height: 5vh;
+    font-size: 2vmin; /* Use vmin para o tamanho da fonte */
+    border: none;
+    border-radius: 1vh;
+    padding: 0.5vh 1vh;
+    margin-top: 1vh;
+}
+
+/* Adiciona ajuste de fonte responsiva para o texto dentro dos inputs */
+.seção1 input[type="text"] {
+    font-size: 2vmin;
+}
+
+.seção1 button {
+    background: #000000;
+    color: #EDEAEA;
+}
+
+.seção2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 25vmin; /* Use vmin para a largura */
+    max-width: 300px;
+    background-color: #E4E4E4;
+    border-right: 2px solid #000000;
+    padding: 1vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.seção2 img {
+    margin-left: 20%;
+    margin-top: 3vh;
+    max-width: 60%;
+}
+
+.seção2 p {
+    font-size: 2vmin; /* Use vmin para o tamanho da fonte */
+    margin: 0;
+    padding-left: 5%;
+    max-width: 90%;
+    word-wrap: break-word;
+}
+
+.seção2 p:nth-last-child(4) {
+    margin-bottom: 2vh;
+}
+
+.seção2 h1 {
+    font-size: 2vmin; /* Use vmin para o tamanho da fonte */
+    margin: 0px;
+    margin-left: 5%;
+    margin-top: 5vh;
+}
+
+.seção2 button {
+    width: 90%;
+    height: 5vh;
+    background: #000000;
+    color: #EDEAEA;
+    font-size: 1.5vmin; /* Use vmin para o tamanho da fonte */
+    border: none;
+    border-radius: 1vh;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+
+.seção2 button:first-child {
+    margin-top: 50vh;
+}
+
+.seção2 button:last-child {
+    margin-bottom: 2vh;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 768px) {
+    .seção1 button,
+    .seção1 input[type="text"],
+    .seção1 p,
+    .seção2 p,
+    .seção2 h1,
+    .seção2 button {
+        font-size: 2.5vmin;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .seção1 button,
+    .seção1 input[type="text"],
+    .seção1 p,
+    .seção2 p,
+    .seção2 h1,
+    .seção2 button {
+        font-size: 2vmin;
+        width: 90%;
+    }
+
+    .seção2 {
+        padding: 5%;
+    }
+
+    .seção2 img {
+        margin-left: 10%;
+        max-width: 80%;
+    }
+}

@@ -1,0 +1,49 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mako&display=swap" rel="stylesheet">
+    <title>Cadastro</title>
+  </head>
+  <body>
+    <p id="apresentação">Conclua o cadastro para aproveitar todos os serviços que foram feitos para você!</p>
+    <form method="post" action="{% url 'cadastrar_usuario' %}">
+        {% csrf_token %}
+        <h1>Cadastre-se</h1>
+        <input type="text" id="nome" name="nome" required placeholder="Nome Completo">
+        <input type="text" id="nascimento" name="nascimento" required placeholder="Data de Nascimento" maxlength="10">
+        <input type="email" id="email" name="email" required placeholder="E-mail">
+        <input type="text" id="CPF" name="CPF" required placeholder="CPF" maxlength="14">
+        <input type="password" id="senha" name="senha" required placeholder="Senha">
+        <button type="submit" id="finalizar">Finalizar Cadastro</button>
+        <p id="temconta">Já tem conta? <a href="{% url 'login' %}">Conecte-se</a></p>
+    </form>
+
+    <script>
+      // Máscara para o CPF (xxx.xxx.xxx-xx)
+      document.getElementById('CPF').addEventListener('input', function(event) {
+          let input = event.target;
+          let value = input.value.replace(/\D/g, '');
+          value = value.replace(/(\d{3})(\d)/, '$1.$2');
+          value = value.replace(/(\d{3})(\d)/, '$1.$2');
+          value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+          input.value = value;
+      });
+
+      // Máscara para a data de nascimento (dd/mm/yyyy)
+      document.getElementById('nascimento').addEventListener('input', function(event) {
+          let input = event.target;
+          let value = input.value.replace(/\D/g, '');
+          value = value.replace(/^(\d{2})(\d)/, '$1/$2');
+          value = value.replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
+          input.value = value;
+      });
+    </script>
+  </body> 
+</html>
